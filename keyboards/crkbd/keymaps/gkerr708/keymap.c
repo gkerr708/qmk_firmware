@@ -53,7 +53,7 @@ bool oled_task_user(void) {
 	        }
         }
     else{
-        oled_write_P(PSTR("CRKBD (v1.0)\n"), false);
+        oled_write_P(PSTR("CRKBD (v1.1)\n"), false);
     }
     return false;
 }
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           _______, _______, _______,    KC_LGUI, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
-    //NAV
+    // NAV
     [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
