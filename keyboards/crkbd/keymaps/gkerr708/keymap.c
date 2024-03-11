@@ -53,7 +53,7 @@ bool oled_task_user(void) {
 	        }
         }
     else{
-        oled_write_P(PSTR("CRKBD\n"), false);
+        oled_write_P(PSTR("CRKBD (v1.0)\n"), false);
     }
     return false;
 }
