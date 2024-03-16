@@ -20,9 +20,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef OLED_ENABLE
 
+
+
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (!is_keyboard_master()) {
+        return OLED_ROTATION_270;
+    }
+    else {
+        return OLED_ROTATION_270;  
+    }
+
+    return rotation;
+}
+
+
+
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        oled_write_P(PSTR("Layer: "), false);
+        oled_write_P(PSTR("Layer"), false);
+        oled_write_P(PSTR("     "), false);
         switch (get_highest_layer(layer_state)) {
             case 0:
                 oled_write_P(PSTR("MAIN\n"), false);
@@ -40,20 +56,20 @@ bool oled_task_user(void) {
                 oled_write_P(PSTR("SCII\n"), false);
                 break;
             case 5:
-                oled_write_P(PSTR("SCII (alt)\n"), false);
+                oled_write_P(PSTR("SCII\n"), false);
                 break;
             case 6:
                 oled_write_P(PSTR("DOTA\n"), false);
                 break;
             case 7:
-                oled_write_P(PSTR("DOTA (alt)\n"), false);
+                oled_write_P(PSTR("DOTA\n"), false);
                 break;
             default:
                 oled_write_P(PSTR("Undefined\n"), false);
 	        }
         }
     else{
-        oled_write_P(PSTR("CRKBD (v1.3)\n"), false);
+        oled_write_P(PSTR("CRKBD     v1.4\n"), false);
     }
     return false;
 }
@@ -113,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_CAPS,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_VOLD, KC_VOLU,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,   TG(3),   TG(4), _______,
+      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,   TG(3),   TG(4),  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LCTL,    KC_3,    KC_2,    KC_ESC,  KC_SPC, KC_LCTL
                                       //`--------------------------'  `--------------------------'
@@ -127,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_VOLD, KC_VOLU,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,   TG(4),   TG(6), _______,
+      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,   TG(4),   TG(6),  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LALT,   MO(5), KC_LCTL,    KC_ESC,  KC_SPC, KC_LCTL
                                       //`--------------------------'  `--------------------------'
@@ -151,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
          KC_0,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_VOLD, KC_VOLU,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,   TG(6),   TG(3), _______,
+      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,   TG(6),   TG(3),  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LALT,   MO(7),  KC_SPC,     KC_ESC,  KC_SPC, KC_LCTL
                                       //`--------------------------'  `--------------------------'
