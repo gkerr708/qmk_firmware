@@ -27,7 +27,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
         return OLED_ROTATION_270;
     }
     else {
-        return OLED_ROTATION_270;  
+        return OLED_ROTATION_270;
     }
 
     return rotation;
@@ -69,7 +69,7 @@ bool oled_task_user(void) {
 	        }
         }
     else{
-        oled_write_P(PSTR("CRKBD     v1.6\n"), false);
+        oled_write_P(PSTR("CRKBD     v1.7\n"), false);
     }
     return false;
 }
@@ -79,8 +79,16 @@ bool oled_task_user(void) {
 
 
 const uint16_t PROGMEM playpause_combo[] = {KC_VOLD, KC_VOLU, COMBO_END};
+const uint16_t PROGMEM reboot_combo[] = {KC_O, KC_L, COMBO_END};
+const uint16_t PROGMEM vold_combo[] =   {KC_Y, KC_H, COMBO_END};
+const uint16_t PROGMEM volu_combo[] =   {KC_U, KC_J, COMBO_END};
+const uint16_t PROGMEM volp_combo[] =   {KC_I, KC_K, COMBO_END};
 combo_t key_combos[] = {
   COMBO(playpause_combo, KC_MPLY),
+  COMBO(reboot_combo,    QK_RBT),
+  COMBO(volu_combo,      KC_VOLU),
+  COMBO(vold_combo,      KC_VOLD),
+  COMBO(volp_combo,      KC_MPLY),
 };
 
 

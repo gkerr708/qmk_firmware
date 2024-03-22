@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define BOOTMAGIC_ROW 0
 #define BOOTMAGIC_COLUMN 0
 
+#define ENABLE_COMPILE_KEYCODE
 //#define USE_MATRIX_I2C
 
 /* Select hand configuration */
