@@ -36,7 +36,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        oled_write_P(PSTR("CRKBD     v1.8\n"), false);
+        oled_write_P(PSTR("CRKBD     v1.9\n"), false);
         oled_write_P(PSTR("     "), false);
         oled_write_P(PSTR("     "), false);
         oled_write_P(PSTR("Layer"), false);
@@ -71,58 +71,23 @@ bool oled_task_user(void) {
 	        }
         }
     else{
-        oled_write_P(PSTR("CRKBD     v1.8\n"), false);
-        oled_write_P(PSTR("     "), false);
-        oled_write_P(PSTR("     "), false);
-        oled_write_P(PSTR("Layer"), false);
-        oled_write_P(PSTR("     "), false);
-        switch (get_highest_layer(layer_state)) {
-            case 0:
-                oled_write_P(PSTR("MAIN\n"), false);
-                break;
-            case 1:
-                oled_write_P(PSTR("NUM\n"), false);
-                break;
-            case 2:
-                oled_write_P(PSTR("NAV\n"), false);
-                break;
-            case 3:
-                oled_write_P(PSTR("CSGO\n"), false);
-                break;
-            case 4:
-                oled_write_P(PSTR("SCII\n"), false);
-                break;
-            case 5:
-                oled_write_P(PSTR("SCII\n"), false);
-                break;
-            case 6:
-                oled_write_P(PSTR("DOTA\n"), false);
-                break;
-            case 7:
-                oled_write_P(PSTR("DOTA\n"), false);
-                break;
-            default:
-                oled_write_P(PSTR("Undefined\n"), false);
-	        }
+        oled_write_P(PSTR("CRKBD     v1.9\n"), false);
     }
     return false;
 }
 #endif
 
 
-
-const uint16_t PROGMEM playpause_combo[] = {KC_VOLD, KC_VOLU, COMBO_END};
-const uint16_t PROGMEM reboot_combo[] = {KC_O, KC_L, COMBO_END};
-const uint16_t PROGMEM vold_combo[] =   {KC_Y, KC_H, COMBO_END};
-const uint16_t PROGMEM volu_combo[] =   {KC_U, KC_J, COMBO_END};
-const uint16_t PROGMEM volp_combo[] =   {KC_I, KC_K, COMBO_END};
-combo_t key_combos[] = {
-  COMBO(playpause_combo, KC_MPLY),
-  COMBO(reboot_combo,    QK_RBT),
-  COMBO(volu_combo,      KC_VOLU),
-  COMBO(vold_combo,      KC_VOLD),
-  COMBO(volp_combo,      KC_MPLY),
-};
+//const uint16_t PROGMEM playpause_combo[] = {KC_VOLD, KC_VOLU, COMBO_END};
+//const uint16_t PROGMEM vold_combo[] =   {KC_Y, KC_H, COMBO_END};
+//const uint16_t PROGMEM volu_combo[] =   {KC_U, KC_J, COMBO_END};
+//const uint16_t PROGMEM volp_combo[] =   {KC_I, KC_K, COMBO_END};
+//combo_t key_combos[] = {
+//  COMBO(playpause_combo, KC_MPLY),
+//  COMBO(volu_combo,      KC_VOLU),
+//  COMBO(vold_combo,      KC_VOLD),
+//  COMBO(volp_combo,      KC_MPLY),
+//};
 
 
 
@@ -178,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // starcraft (a)
     [4] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_LCTL,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
+         KC_K,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
        KC_TAB,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_VOLD, KC_VOLU,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
