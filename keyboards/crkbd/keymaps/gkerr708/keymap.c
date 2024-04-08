@@ -35,7 +35,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        oled_write_P(PSTR("CRKBD  v1.10\nLayer"), false);
+        oled_write_P(PSTR("CRKBD (v1.10)\n"), false);
         switch (get_highest_layer(layer_state)) {
             case 0:
                 oled_write_P(PSTR("MAIN"), false);
@@ -66,7 +66,7 @@ bool oled_task_user(void) {
 	        }
         }
     else{
-        oled_write_P(PSTR("CRKBD  v1.10"), false);
+        oled_write_P(PSTR("CRKBD (v1.10)"), false);
     }
     return false;
 }
