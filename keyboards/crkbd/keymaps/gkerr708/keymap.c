@@ -35,38 +35,38 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        oled_write_P(PSTR("CRKBD\nv1.10\n\n\nLayer\n"), false);
+        oled_write_P(PSTR("CRKBD  v1.10\nLayer"), false);
         switch (get_highest_layer(layer_state)) {
             case 0:
-                oled_write_P(PSTR("MAIN\n"), false);
+                oled_write_P(PSTR("MAIN"), false);
                 break;
             case 1:
-                oled_write_P(PSTR("NUM\n"), false);
+                oled_write_P(PSTR("NUM"), false);
                 break;
             case 2:
-                oled_write_P(PSTR("NAV\n"), false);
+                oled_write_P(PSTR("NAV"), false);
                 break;
             case 3:
-                oled_write_P(PSTR("CSGO\n"), false);
+                oled_write_P(PSTR("CSGO"), false);
                 break;
             case 4:
-                oled_write_P(PSTR("SCII\n"), false);
+                oled_write_P(PSTR("SCII"), false);
                 break;
             case 5:
-                oled_write_P(PSTR("SCII\n"), false);
+                oled_write_P(PSTR("SCII"), false);
                 break;
             case 6:
-                oled_write_P(PSTR("DOTA\n"), false);
+                oled_write_P(PSTR("DOTA"), false);
                 break;
             case 7:
-                oled_write_P(PSTR("DOTA\n"), false);
+                oled_write_P(PSTR("DOTA"), false);
                 break;
             default:
-                oled_write_P(PSTR("Undefined\n"), false);
+                oled_write_P(PSTR("Undefined"), false);
 	        }
         }
     else{
-        oled_write_P(PSTR("CRKBD\nv1.10\n"), false);
+        oled_write_P(PSTR("CRKBD  v1.10"), false);
     }
     return false;
 }
