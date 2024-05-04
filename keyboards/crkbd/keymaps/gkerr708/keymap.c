@@ -33,6 +33,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 */
 
 
+/*
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
         oled_write_P(PSTR("CRKBD (v1.10)\n"), false);
@@ -71,7 +72,7 @@ bool oled_task_user(void) {
     return false;
 }
 #endif
-
+*/
 
 //const uint16_t PROGMEM playpause_combo[] = {KC_VOLD, KC_VOLU, COMBO_END};
 //const uint16_t PROGMEM vold_combo[] =   {KC_Y, KC_H, COMBO_END};
@@ -83,6 +84,18 @@ bool oled_task_user(void) {
 //  COMBO(vold_combo,      KC_VOLD),
 //  COMBO(volp_combo,      KC_MPLY),
 //};
+
+
+bool oled_task_user(void) {
+    if (is_keyboard_master()) {
+        oled_write_P(PSTR("CRKBD (v1.11)\n"), false);
+        }
+    else{
+        oled_write_P(PSTR("CRKBD (v1.11)"), false);
+        }
+    return false;
+}
+#endif
 
 
 
