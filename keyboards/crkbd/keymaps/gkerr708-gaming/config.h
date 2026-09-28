@@ -21,6 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 // this is for booting
+#undef BOOTMAGIC_ROW
+#undef BOOTMAGIC_COLUMN
 #define BOOTMAGIC_ROW 0
 #define BOOTMAGIC_COLUMN 0
 
