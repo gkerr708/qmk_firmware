@@ -25,11 +25,6 @@
 #define I2C1_TIMINGR_SCLH 0x03U
 #define I2C1_TIMINGR_SCLL 0x09U
 
-/* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
-#define LOCKING_SUPPORT_ENABLE
-/* Locking resynchronize hack */
-#define LOCKING_RESYNC_ENABLE
-
 // configure oled driver for the 128x32 oled
 #define OLED_UPDATE_INTERVAL 66 // ~15fps
 
@@ -39,12 +34,8 @@
 // OLED timeout reimplemented in the keyboard-specific code
 #define CUSTOM_OLED_TIMEOUT 60000
 
-// Custom config starts after VIA's EEPROM usage,
-// dynamic keymaps start after this.
 // Custom config Usage:
 // 1 for enabled encoder modes (1 byte)
 // 1 for OLED default mode (1 byte)
 // 6 for 3x custom encoder settings, left, right, and press (18 bytes)
-#define VIA_EEPROM_CUSTOM_CONFIG_SIZE 20
-
-
+#define EECONFIG_KB_DATA_SIZE 20

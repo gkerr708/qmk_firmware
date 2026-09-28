@@ -47,7 +47,7 @@
 
 #ifdef PROTOCOL_CHIBIOS
 #    include <hal.h>
-#    if STM32_USB_USE_OTG1 == TRUE
+#    if STM32_USB_USE_OTG1 == TRUE || STM32_USB_USE_OTG2 == TRUE
 #        define USB_ENDPOINTS_ARE_REORDERABLE
 #    endif
 #endif
@@ -76,6 +76,13 @@ typedef struct {
     USB_HID_Descriptor_HID_t   Raw_HID;
     USB_Descriptor_Endpoint_t  Raw_INEndpoint;
     USB_Descriptor_Endpoint_t  Raw_OUTEndpoint;
+#endif
+
+#ifdef PLOVER_HID_ENABLE
+    // Plover HID Interface
+    USB_Descriptor_Interface_t Plover_Interface;
+    USB_HID_Descriptor_HID_t   Plover_HID;
+    USB_Descriptor_Endpoint_t  Plover_INEndpoint;
 #endif
 
 #if defined(MOUSE_ENABLE) && !defined(MOUSE_SHARED_EP)
@@ -164,6 +171,10 @@ enum usb_interfaces {
     RAW_INTERFACE,
 #endif
 
+#ifdef PLOVER_HID_ENABLE
+    PLOVER_HID_INTERFACE,
+#endif
+
 #if defined(MOUSE_ENABLE) && !defined(MOUSE_SHARED_EP)
     MOUSE_INTERFACE,
 #endif
@@ -196,6 +207,8 @@ enum usb_interfaces {
     TOTAL_INTERFACES
 };
 
+#define IS_VALID_INTERFACE(i) ((i) >= 0 && (i) < TOTAL_INTERFACES)
+
 #define NEXT_EPNUM __COUNTER__
 
 /*
@@ -221,8 +234,12 @@ enum usb_endpoints {
 #    ifdef USB_ENDPOINTS_ARE_REORDERABLE
 #        define RAW_OUT_EPNUM RAW_IN_EPNUM
 #    else
-    RAW_OUT_EPNUM         = NEXT_EPNUM,
+    RAW_OUT_EPNUM = NEXT_EPNUM,
 #    endif
+#endif
+
+#ifdef PLOVER_HID_ENABLE
+    PLOVER_HID_IN_EPNUM = NEXT_EPNUM,
 #endif
 
 #ifdef SHARED_EP_ENABLE
@@ -248,7 +265,7 @@ enum usb_endpoints {
 #    ifdef USB_ENDPOINTS_ARE_REORDERABLE
 #        define CDC_OUT_EPNUM CDC_IN_EPNUM
 #    else
-    CDC_OUT_EPNUM         = NEXT_EPNUM,
+    CDC_OUT_EPNUM = NEXT_EPNUM,
 #    endif
 #endif
 
@@ -277,8 +294,6 @@ enum usb_endpoints {
 #    define MAX_ENDPOINTS USB_MAX_ENDPOINTS
 #endif
 
-// TODO - ARM_ATSAM
-
 #if (NEXT_EPNUM - 1) > MAX_ENDPOINTS
 #    error There are not enough available endpoints to support all functions. Please disable one or more of the following: Mouse Keys, Extra Keys, Console, NKRO, MIDI, Serial, Steno
 #endif
@@ -287,6 +302,7 @@ enum usb_endpoints {
 #define SHARED_EPSIZE 32
 #define MOUSE_EPSIZE 16
 #define RAW_EPSIZE 32
+#define PLOVER_HID_EPSIZE 9
 #define CONSOLE_EPSIZE 32
 #define MIDI_STREAM_EPSIZE 64
 #define CDC_NOTIFICATION_EPSIZE 8
