@@ -22,6 +22,8 @@ enum layers {
     _SC_B,
     _DOTA_A,
     _DOTA_B,
+    _HLL,
+    _HLL_NUM,
     _NUM,
     _NAV,
     _GAMING,
@@ -30,7 +32,7 @@ enum layers {
 #ifdef OLED_ENABLE
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        oled_write_P(PSTR("CRKBD (v1.13)\n"), false);
+        oled_write_P(PSTR("CRKBD (v1.14)\n"), false);
         switch (get_highest_layer(layer_state | default_layer_state)) {
             case _BASE:   oled_write_P(PSTR("Layer: MAIN\n"), false); break;
             case _CSGO:   oled_write_P(PSTR("Layer: CSGO\n"), false); break;
@@ -38,6 +40,8 @@ bool oled_task_user(void) {
             case _SC_B:   oled_write_P(PSTR("Layer: SCII (B)\n"), false); break;
             case _DOTA_A: oled_write_P(PSTR("Layer: DOTA (A)\n"), false); break;
             case _DOTA_B: oled_write_P(PSTR("Layer: DOTA (B)\n"), false); break;
+            case _HLL:    oled_write_P(PSTR("Layer: HLL\n"), false); break;
+            case _HLL_NUM: oled_write_P(PSTR("Layer: HLL NUM\n"), false); break;
             case _NUM:    oled_write_P(PSTR("Layer: NUM\n"), false); break;
             case _NAV:    oled_write_P(PSTR("Layer: NAV\n"), false); break;
             case _GAMING: oled_write_P(PSTR("Layer: GAMING\n"), false); break;
@@ -70,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
          KC_5,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_VOLD, KC_VOLU,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_MPLY, XXXXXXX,MO(_GAMING), KC_ENT,
+      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_MPLY, MO(_GAMING), KC_SLSH, KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LCTL,    KC_3,    KC_2,    KC_ESC,  KC_SPC, KC_LCTL
                                       //`--------------------------'  `--------------------------'
@@ -106,9 +110,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
        KC_TAB,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT,
+      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM, MO(_GAMING), KC_SLSH,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LALT, MO(_DOTA_B),  KC_SPC,     KC_ESC,  KC_SPC, KC_LCTL
+                                      KC_LALT, MO(_DOTA_B),  KC_SPC,     KC_ESC,  KC_SPC, KC_LGUI
                                       //`--------------------------'  `--------------------------'
   ),
     // dota (B)
@@ -120,7 +124,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      _______, _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          MO(_GAMING), _______, _______,    _______, _______, _______
+                                          _______, _______, _______,    _______, _______, _______
+                                      //`--------------------------'  `--------------------------'
+  ),
+
+    // Hell Let Loose: Vietnam. Built from the game's default binds (Controls screen).
+    [_HLL] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      KC_LALT,    KC_T,   KC_Q,    KC_W,    KC_E,    KC_R,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
+  //|--------+---------------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+       KC_TAB,    KC_G,   KC_A,    KC_S,    KC_D,    KC_F,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+  //|--------+---------------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      KC_LCTL,    KC_B,   KC_Z,    KC_X,    KC_C,    KC_V,                         KC_N,    KC_M, KC_COMM,  MO(_GAMING), KC_SLSH,  KC_ENT,
+  //| ----------------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                      KC_LSFT,  KC_SPC, MO(_HLL_NUM),  KC_ESC,  KC_SPC, KC_LGUI
+                                      //`--------------------------'  `--------------------------'
+  ),
+
+    // Hell Let Loose number layer: hold the inner left thumb. Weapon slots 1-5 on the
+    // top row, 6-0 on the home row, Caps Lock (equip attachment) on the home-row pinky.
+    [_HLL_NUM] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+       KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      _______, _______, _______, _______, _______, _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      KC_CAPS,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                      _______, _______, _______, _______, _______, _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+         KC_M, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -143,22 +174,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_VOLD, KC_VOLU,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     MO(_GAMING), KC_F12, KC_F12,XXXXXXX, XXXXXXX, XXXXXXX,                      KC_BRID, KC_BRIU, KC_CALC, XXXXXXX, XXXXXXX, XXXXXXX,
+      _______, KC_F12, KC_F12,XXXXXXX, XXXXXXX, XXXXXXX,                      KC_BRID, KC_BRIU, KC_CALC, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, KC_CAPS, _______,    _______, _______, _______
+                                          _______, KC_CAPS, MO(_GAMING),    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
-    // GAMING: hold NAV, then hold the "Z" key (this slot), then tap a selector with the right hand.
-    // DF() sets the base layer, so a stray tap can never leave a game stuck "toggled".
+    // GAMING
     [_GAMING] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   DF(_BASE), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   DF(_BASE),  DF(_DOTA_A), DF(_HLL),DF(_CSGO),DF(_SC_A), XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      DF(_BASE), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, XXXXXXX, XXXXXXX, DF(_CSGO),DF(_SC_A),DF(_DOTA_A)
+                                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   )
 };
