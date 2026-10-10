@@ -17,10 +17,10 @@ Flashing (Blok / RP2040, CONVERT_TO=blok):
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        oled_write_P(PSTR("CRKBD (v1.13)\n"), false);
+        oled_write_P(PSTR("CRKBD (v1.14W)\n"), false);
         }
     else{
-        oled_write_P(PSTR("CRKBD (v1.13)"), false);
+        oled_write_P(PSTR("CRKBD (v1.14W)"), false);
         }
     return false;
 }

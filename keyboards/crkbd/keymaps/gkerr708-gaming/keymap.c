@@ -32,7 +32,7 @@ enum layers {
 #ifdef OLED_ENABLE
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        oled_write_P(PSTR("CRKBD (v1.14)\n"), false);
+        oled_write_P(PSTR("CRKBD (v1.14G)\n"), false);
         switch (get_highest_layer(layer_state | default_layer_state)) {
             case _BASE:   oled_write_P(PSTR("Layer: MAIN\n"), false); break;
             case _CSGO:   oled_write_P(PSTR("Layer: CSGO\n"), false); break;
@@ -48,7 +48,7 @@ bool oled_task_user(void) {
             default:      oled_write_P(PSTR("Layer: Undefined\n"), false); break;
         }
     } else {
-        oled_write_P(PSTR("CRKBD (v1.13)"), false);
+        oled_write_P(PSTR("CRKBD (v1.14G)"), false);
     }
     return false;
 }
